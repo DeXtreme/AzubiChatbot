@@ -1,14 +1,14 @@
-name: Python Unit Tests
+name: Run Unit Tests
 
 on:
   pull_request:
-    branches: ["develop"]
+    branches: ["develop", "main"]
 
   workflow_dispatch:
 
 jobs:
-  test:
-    name: Run Python Unittests
+  test-py:
+    name: Run python unit tests
     runs-on: ubuntu-latest
 
     steps:
