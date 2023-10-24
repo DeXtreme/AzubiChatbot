@@ -1,9 +1,10 @@
-name: Python Unittests
+name: Python Unit Tests
 
 on:
   pull_request:
-    branches:
-      - develop
+    branches: ["develop"]
+
+  workflow_dispatch:
 
 jobs:
   test:
@@ -11,18 +12,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.10
+      - name: Set up Python
+        uses: actions/setup-python@v4.7.1
+        with:
+          python-version: 3.10
 
-    - name: Install dependencies
-      run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-    - name: Run unittests
-      run: python -m unittest discover tests
+      - name: Run unit tests
+        run: python -m unittest discover tests
 
 
