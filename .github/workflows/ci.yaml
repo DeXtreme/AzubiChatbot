@@ -29,17 +29,20 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
-
+    env:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      TAG_NAME: ${{ github.ref_name }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - run: docker login -u ${DOCKER_USERNAME} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
       - name: Build image
-        run: docker build -t ${DOCKER_USERNAME}/azubichatbot:${{ github.ref_name }} ./
+        run: docker build -t ${DOCKER_USERNAME}/azubichatbot:${TAG_NAME} ./
       
       - name: Push image
-        run: docker push ${DOCKER_USERNAME}/azubichatbot:${{ github.ref_name }}
+        run: docker push ${DOCKER_USERNAME}/azubichatbot:${TAG_NAME}
       
 
 
