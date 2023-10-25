@@ -1,4 +1,4 @@
-name: Run Unit Tests
+name: Test and Build
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-py:
+  test:
     name: Run python unit tests
     runs-on: ubuntu-latest
 
@@ -25,5 +25,22 @@ jobs:
 
       - name: Run unit tests
         run: python -m unittest discover tests
+  
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - run: docker login -u ${DOCKER_USERNAME} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build image
+        run: docker build -t ${DOCKER_USERNAME}/azubichatbot:${{ github.ref_name }} ./
+      
+      - name: Push image
+        run: docker push ${DOCKER_USERNAME}/azubichatbot:${{ github.ref_name }}
+      
+
 
 
