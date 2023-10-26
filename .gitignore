@@ -1,0 +1,6 @@
+__pycache__/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
