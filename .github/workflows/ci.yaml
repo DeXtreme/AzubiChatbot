@@ -2,7 +2,12 @@ name: Test and Build
 
 on:
   pull_request:
-    branches: ["develop", "main"]
+    branches: 
+      - develop
+      - main
+    paths:
+      - "*.py"
+      - "*.json"
 
   workflow_dispatch:
 
