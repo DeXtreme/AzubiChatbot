@@ -6,9 +6,10 @@ on:
       - develop
       - main
     paths:
-      - "*.py"
-      - "*.json"
-
+      - "**.py"
+      - "**.json"
+      
+  workflow_call:
   workflow_dispatch:
 
 jobs:
