@@ -23,7 +23,7 @@ class ChatbotTestCase(unittest.TestCase):
         self.duration_file = data_dir/"program_duration.json"
         
         with open(self.duration_file,"r") as f:
-            self.data = json.loads(f.read())
+            self.data = {"Program Duration": json.loads(f.read())}
 
     def test_load_function(self):
         """Test `load_data` function"""
