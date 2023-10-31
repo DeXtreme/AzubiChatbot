@@ -8,10 +8,17 @@ def load_data():
 
     responses = {}
 
-    
-    for file in data_dir.iterdir():
-        with open(file) as f:
-            responses.update(json.loads(f.read()))
+    area_json = {
+        "Career Opportunities": "career.json",
+        "Eligibility Criteria": "criteria.json",
+        "Curriculum": "curriculum.json",
+        "Payment Options": "payment.json",
+        "Program Duration": "program_duration.json"
+    }
+
+    for area in area_json:
+        with open(data_dir/area_json[area]) as f:
+            responses[area] = json.loads(f.read())
 
     return responses
 
@@ -66,8 +73,8 @@ if __name__ == "__main__":
             continue
         if not area:
             query = input("User: ")
-            area = query
             print("")
+            area = query
         elif not question:
             query = input("User: ")
             question = query
