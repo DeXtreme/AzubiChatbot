@@ -29,13 +29,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      - name: Setup display
-        run: Xvfb :1 -screen 0 1024x768x16 &
-        
-      - name: Export display
-        run: export DISPLAY=:1
-          
       - name: Run unit tests
-        run: python -m unittest discover tests
+        run: |
+          Xvfb :1 -screen 0 1024x768x16 &
+          DISPLAY=:1 python -m unittest discover tests
 
 
