@@ -30,6 +30,7 @@ class BotViewTestCase(APITestCase):
 
         with self.subTest("With TelegramView"):
             url = reverse("telegram_view")
+            print(url)
 
             chat = telegram.Chat(1,"private")
             message = telegram.Message(1,datetime.now(),chat,text="/start")
