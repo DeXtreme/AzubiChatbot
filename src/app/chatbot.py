@@ -32,7 +32,7 @@ class Chatbot:
     
     def load_data(self):
         # Define and return the dictionary with responses
-        data_dir = pathlib.Path(__file__).parent.parent/"src/data"
+        data_dir = pathlib.Path(__file__).parent.parent/"data"
 
         responses = {}
 

@@ -3,11 +3,11 @@ import unittest
 import json
 import os
 
-class ProgramDurationJSONTestCase(unittest.TestCase):
+class CurriculumJSONTestCase(unittest.TestCase):
 
     def setUp(self):
         current_directory = Path(__file__).resolve().parent
-        self.file_path = current_directory.parent/"src"/"data"/"program_duration.json"
+        self.file_path =  current_directory.parent.parent/"data"/"curriculum.json"
 
     def test_file_exists(self):
         self.assertTrue(os.path.exists(self.file_path), f"File '{self.file_path}' does not exist.")

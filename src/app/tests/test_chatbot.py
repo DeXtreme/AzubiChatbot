@@ -4,8 +4,8 @@ import pathlib
 import unittest
 import tkinter as tk
 
-src_dir = pathlib.Path(__file__).parent.parent/"src/"
-sys.path.append(str(src_dir))
+APP_DIR = pathlib.Path(__file__).parent.parent
+sys.path.append(str(APP_DIR))
 
 from chatbot import Chatbot
 
@@ -20,7 +20,7 @@ class ChatbotTestCase(unittest.TestCase):
             "Curriculum",
             "Program Duration"]
         
-        data_dir = src_dir/"data/"
+        data_dir = APP_DIR.parent/"data/"
         self.duration_file = data_dir/"program_duration.json"
         
         with open(self.duration_file,"r") as f:
