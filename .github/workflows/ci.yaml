@@ -29,7 +29,7 @@ jobs:
       - name: Run app unit tests
         run: |
           Xvfb :1 -screen 0 1024x768x16 &
-          DISPLAY=:1 python -m unittest discover src/app/tests
+          DISPLAY=:1 SERVER_URL=${{secrets.server_url}} python -m unittest discover src/app/tests
       
       - name: Install api dependencies
         run: pip install -r src/api/requirements.txt
@@ -37,6 +37,6 @@ jobs:
       - name: Run api unit tests
         run: |
           cd src/api
-          TEST=1 SERVER_URL=${{secrets.server_url}} python manage.py test
+          TEST=1 python manage.py test
 
 
