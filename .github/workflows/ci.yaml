@@ -37,6 +37,6 @@ jobs:
       - name: Run api unit tests
         run: |
           cd src/api
-          TEST=1 python manage.py test
+          TEST=1 SERVER_URL=${{secrets.server_url}} python manage.py test
 
 
