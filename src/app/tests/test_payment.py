@@ -7,7 +7,7 @@ class PaymentJSONTestCase(unittest.TestCase):
 
     def setUp(self):
         current_directory = Path(__file__).resolve().parent
-        self.file_path = current_directory.parent/"src"/"data"/"payment.json"
+        self.file_path = current_directory.parent.parent/"data"/"payment.json"
 
     def test_file_exists(self):
         self.assertTrue(os.path.exists(self.file_path), f"File '{self.file_path}' does not exist.")

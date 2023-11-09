@@ -1,9 +1,12 @@
-import tkinter as tk
-from tkinter import scrolledtext
-
+import os
 import json
 import pathlib
+import requests
+import tkinter as tk
+from tkinter import scrolledtext
+from dotenv import load_dotenv
 
+load_dotenv()
 
 
 class Chatbot:
@@ -32,7 +35,7 @@ class Chatbot:
     
     def load_data(self):
         # Define and return the dictionary with responses
-        data_dir = pathlib.Path(__file__).parent.parent/"src/data"
+        data_dir = pathlib.Path(__file__).parent.parent/"data"
 
         responses = {}
 
@@ -51,44 +54,13 @@ class Chatbot:
         return responses
 
     def respond(self,area=None, question=None, start=False):
-        responses = self.load_data()
+        url = os.environ.get("SERVER_URL")
         
-        # Create a new dict with lower case keys
-        responses_lower = {area.lower():{q.lower():responses[area][q] for q in responses[area]} for area in responses}
-
-        # Check if start is True
-        if start:
-            message = "Hello and welcome to Azubi. I am AzubiGPT, here to answer all your questions.\nWhich area would you like to hear about?\n"
-            areas = list(responses_lower.keys())
-            area_list = "\n".join([f"{i}. {area.title()}" for i, area in enumerate(areas, 1)])
-            return message + area_list
-
-        # Check if no arguments are passed
-        if area is None and question is None:
-            message = "Which area would you like to hear about?\n"
-            areas = list(responses_lower.keys())
-            area_list = "\n".join([f"{i}. {area.title()}" for i, area in enumerate(areas, 1)])
-            return message + area_list
+        response = requests.post(url,json={"start":start,"area":area,"question":question})
+        response = response.json()
+        return response["response"]
         
-        # Check if only the area argument is passed
-        if area is not None and question is None:
-            area = area.lower()
-            if area in responses_lower:
-                questions = list(responses_lower[area].keys())
-                question_list = "\n".join([f"{i}. {q.capitalize()}" for i, q in enumerate(questions, 1)])
-                return f"Here are a few FAQs in this area:\n{question_list}"
-
-        # Check if both area and question arguments are passed
-        if area is not None and question is not None:
-            area = area.lower()
-            question = question.lower()
-            if area in responses_lower and question in responses_lower[area]:
-                return responses_lower[area][question]
-
-        # Handle other cases or invalid input
-        return "Sorry, I don't quite understand."
-
-    
+        
     def send_user_input(self, event=None):
         
         user_input = self.user_input.get()
