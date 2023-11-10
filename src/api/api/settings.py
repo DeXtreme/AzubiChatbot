@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
-
+load_dotenv()
 BOT_TOKEN = os.environ.get("BOT_TOKEN","token")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
