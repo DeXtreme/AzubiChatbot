@@ -28,7 +28,7 @@ The Chatbot API server is a Django/DRF based server running on a public EC2 inst
 
 ### The Architecture
 <a href="https://github.com/DeXtreme/AzubiChatbot">
-    <img src="architecture.png" alt="Logo" width="auto" height="150">
+    <img src="architecture.png" alt="Logo" width="auto" height="450">
 </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -84,7 +84,11 @@ sudo python manage.py migrate & sudo python manage.py runserver 0.0.0.0:80
 ```sh
 sudo pip install -r requirements.txt
 ```
-12. Start the application
+12. Create a `.env` file and add the environment variables
+```sh
+SERVER_URL=<EC2 instance url>
+```
+13. Start the application
 ```sh
 python chatbot.py
 ```
