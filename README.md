@@ -47,9 +47,9 @@ To get a local copy up and running follow these simple example steps.
    git clone https://github.com/your_username_/Project-Name.git
 ```
 2. Navigate to the `terraform` folder
-   ```sh
-   cd src/terraform
-   ```
+```sh
+cd src/terraform
+```
 3. Initialize terraform
 ```sh
 terraform init
